@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timed Exam - Setup</title>
+  <meta name="description" content="Configure timed classroom examination questions or import from a Gedit UTF-8 text file.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="setup-container">
+    
+    <!-- HEADER -->
+    <header class="setup-header">
+      <h1>Timed <span>Exam</span></h1>
+      <p class="subtitle">Create questions manually or import a text file prepared in Gedit.</p>
+    </header>
+
+    <!-- QUESTION SOURCE & CONFIGURATION CARDS -->
+    <div class="setup-grid-cards">
+      
+      <!-- CARD 1: IMPORT FROM TXT FILE -->
+      <section class="config-card import-card" aria-label="Import Questions from File">
+        <div class="card-title-row">
+          <h3>📂 Import Questions from TXT File</h3>
+          <span class="gedit-badge" title="Compatible with Gedit on Ubuntu/Linux UTF-8 files">Gedit UTF-8 Compatible</span>
+        </div>
+        <p class="card-description">
+          Select a <code>.txt</code> file created with Gedit or any text editor. Questions should be numbered (e.g., <code>1. Question</code> or <code>1) Question</code>).
+        </p>
+
+        <div class="import-controls-row">
+          <label for="fileInput" class="btn-import-file">
+            <span>📁 Choose TXT File</span>
+            <input type="file" id="fileInput" accept=".txt,text/plain" class="hidden-file-input">
+          </label>
+          <span id="fileNameDisplay" class="file-name-display">No file chosen</span>
+        </div>
+
+        <!-- Import Success Banner -->
+        <div id="importSuccessBanner" class="import-success-banner hidden" role="status">
+          <span class="success-icon">✓</span>
+          <span id="importSuccessMessage">12 questions imported successfully</span>
+        </div>
+      </section>
+
+      <!-- CARD 2: EXAM TIME & MANUAL CONFIGURATION -->
+      <section class="config-card" aria-label="Exam Time Settings">
+        <div class="card-title-row">
+          <h3>⚙️ Exam Parameters</h3>
+        </div>
+
+        <div class="config-grid">
+          <!-- Number of Questions Input -->
+          <div class="form-group">
+            <label for="numQuestions">Number of Questions</label>
+            <div class="form-control-row">
+              <input 
+                type="number" 
+                id="numQuestions" 
+                class="input-number" 
+                value="5" 
+                min="1" 
+                max="100"
+                aria-label="Number of questions"
+              >
+              <button type="button" id="btnLoadDemo" class="preset-btn" title="Populate with sample classroom questions">
+                ⚡ Load Demo Questions
+              </button>
+            </div>
+          </div>
+
+          <!-- Time per Question Input -->
+          <div class="form-group">
+            <label for="timePerQuestion">Time Per Question</label>
+            <div class="form-control-row">
+              <input 
+                type="number" 
+                id="timePerQuestion" 
+                class="input-number" 
+                value="15" 
+                min="1" 
+                max="3600"
+                aria-label="Time per question in seconds"
+              >
+              <span class="input-suffix">seconds</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- VALIDATION ERROR BANNER -->
+    <div id="errorBanner" class="error-banner hidden" role="alert">
+      <span class="error-icon">⚠️</span>
+      <span id="errorMessage">Please complete all required fields correctly.</span>
+    </div>
+
+    <!-- DYNAMIC QUESTION INPUTS SECTION -->
+    <section class="questions-section" aria-label="Questions List">
+      <div class="section-title">
+        <h2>Exam Questions</h2>
+        <span id="questionsCountBadge" class="question-badge">5 Questions</span>
+      </div>
+
+      <div id="questionsContainer">
+        <!-- Dynamically generated question cards injected here -->
+      </div>
+    </section>
+
+    <!-- START EXAM ACTION BUTTON -->
+    <button type="button" id="btnStartExam" class="btn-primary-large">
+      ▶ Start Exam
+    </button>
+
+  </main>
+
+  <!-- OVERWRITE CONFIRMATION MODAL FOR IMPORT -->
+  <div id="importConfirmModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="importConfirmTitle">
+    <div class="modal-card">
+      <div class="modal-icon">⚠️</div>
+      <h2 id="importConfirmTitle" class="modal-title">Replace Questions?</h2>
+      <p class="modal-body">You already have questions entered on the setup page. Importing this file will replace your current questions.</p>
+      <div class="modal-actions">
+        <button type="button" id="btnConfirmImport" class="btn-control btn-play">Replace & Import</button>
+        <button type="button" id="btnCancelImport" class="btn-control btn-nav">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timed Exam - Live Screen</title>
+  <meta name="description" content="Classroom timed exam presentation screen with live countdown timer and teacher controls.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="exam-layout">
+    
+    <!-- TOP NAVIGATION & STATUS BAR -->
+    <header class="exam-topbar">
+      <div class="brand-title">TIMED <span>EXAM</span></div>
+
+      <!-- Center Progress -->
+      <div class="progress-container">
+        <span id="progressText" class="progress-text">Question 1 of 1</span>
+        <div class="progress-bar-bg">
+          <div id="progressBarFill" class="progress-bar-fill"></div>
+        </div>
+      </div>
+
+      <!-- Right Status & Fullscreen -->
+      <div class="topbar-right">
+        <div id="statusBadge" class="status-badge status-ready">
+          <span class="status-dot"></span>
+          <span id="statusText">READY</span>
+        </div>
+        <button type="button" id="btnFullscreen" class="btn-icon-top" title="Toggle Fullscreen (F)">
+          ⛶
+        </button>
+      </div>
+    </header>
+
+    <!-- MAIN DISPLAY AREA (QUESTION & TIMER) -->
+    <main class="exam-main-content">
+      
+      <!-- Prominent Question Card with dir="auto" for RTL/LTR Arabic Support -->
+      <section id="questionCard" class="question-display-card" aria-live="polite">
+        <p id="questionText" class="question-text-content" dir="auto">Loading question...</p>
+      </section>
+
+      <!-- Giant Countdown Timer -->
+      <section class="timer-container" aria-label="Countdown Timer">
+        <div id="timerBox" class="timer-box">
+          <div id="timerNumber" class="timer-number">15</div>
+          <div class="timer-label">SECONDS</div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- BOTTOM TEACHER CONTROLS BAR -->
+    <footer class="controls-wrapper">
+      
+      <!-- Primary Controls Group -->
+      <div class="controls-main-group">
+        <button type="button" id="btnPrev" class="btn-control btn-nav" title="Previous Question (Left Arrow)">
+          ← Previous
+        </button>
+        <button type="button" id="btnPlay" class="btn-control btn-play" title="Start/Resume Countdown (Spacebar)">
+          ▶ Play
+        </button>
+        <button type="button" id="btnPause" class="btn-control btn-pause" title="Pause Countdown (Spacebar)">
+          ⏸ Pause
+        </button>
+        <button type="button" id="btnStop" class="btn-control btn-stop" title="Stop Exam">
+          ⏹ Stop
+        </button>
+        <button type="button" id="btnNext" class="btn-control btn-nav" title="Next Question (Right Arrow)">
+          Next →
+        </button>
+      </div>
+
+      <!-- Jump To Question Group -->
+      <div class="controls-jump-group">
+        <label for="jumpInput" class="jump-label">Start from question:</label>
+        <input type="number" id="jumpInput" class="input-jump" min="1" value="1" aria-label="Jump to question number">
+        <button type="button" id="btnGoJump" class="btn-go">GO</button>
+      </div>
+
+    </footer>
+
+    <!-- KEYBOARD SHORTCUTS LEGEND -->
+    <aside class="keyboard-legend">
+      <span><span class="key-badge">Space</span> Play/Pause</span>
+      <span><span class="key-badge">←</span> <span class="key-badge">→</span> Prev / Next</span>
+      <span><span class="key-badge">F</span> Fullscreen</span>
+    </aside>
+
+  </div>
+
+  <!-- STOP CONFIRMATION MODAL -->
+  <div id="stopModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="stopModalTitle">
+    <div class="modal-card">
+      <div class="modal-icon">⚠️</div>
+      <h2 id="stopModalTitle" class="modal-title">Stop the Exam?</h2>
+      <p class="modal-body">Are you sure you want to stop the exam session and return to setup? Your current progress will be lost.</p>
+      <div class="modal-actions">
+        <button type="button" id="btnConfirmStop" class="btn-control btn-stop">Yes, Stop Exam</button>
+        <button type="button" id="btnCancelStop" class="btn-control btn-nav">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXAM COMPLETION OVERLAY -->
+  <div id="completionModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="completionTitle">
+    <div class="modal-card">
+      <div class="modal-icon">🎉</div>
+      <h2 id="completionTitle" class="modal-title">EXAM COMPLETE</h2>
+      <p id="completionMessage" class="modal-body">You have reached the end of the exam. All questions completed!</p>
+      <div class="modal-actions">
+        <button type="button" id="btnRestartExam" class="btn-control btn-play">🔄 Restart Exam</button>
+        <button type="button" id="btnBackToSetup" class="btn-control btn-nav">⚙️ Back to Setup</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

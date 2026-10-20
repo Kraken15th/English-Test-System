@@ -1,0 +1,23 @@
+1. What is HTML?
+
+2. What is CSS?
+
+3. What is JavaScript?
+
+4. What is the difference between HTML and CSS?
+
+5. Explain what a variable is in JavaScript.
+
+6. ما هي لغة HTML؟
+
+7. ما هو الغرض الأساسي من CSS؟
+
+8. ما الفرق بين HTML و CSS؟
+
+9. Explain الفرق بين المتغير والثابت في JavaScript.
+
+10. ما المقصود بكلمة "function" في البرمجة؟
+
+11. If a student gets 10 points out of 20, what percentage did the student achieve?
+
+12. اشرح الفرق بين Frontend و Backend مع ذكر مثال لكل منهما.
